@@ -1,0 +1,19 @@
+:root {
+  --transition: 300ms;
+  --fontsize: 4vw;
+  --module-color: rgba(204, 204, 204, 0.301);
+  --module-shadow: 3px 3px 5px rgba(0, 0, 0, 0.651);
+  --module-hover-scale: 1.03;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}

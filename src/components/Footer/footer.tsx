@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { WeatherItem, WeatherResponse } from "../../types";
-import './style.css'
+import "./style.css";
 
 interface Props {
   city?: WeatherResponse;
@@ -35,29 +35,29 @@ export const Footer: React.FC<Props> = ({ city }) => {
       },
       {}
     );
-  
+
     for (const key in weekObj) {
       weekObj[key] = loadedData.filter((el) => getDay(el.dt_txt) === key);
-  
+
       if (weekObj[key].length < 1) {
         delete weekObj[key];
       }
     }
-  
+
     const updatedWeekObj = Object.keys(weekObj).reduce((acc, key) => {
       const temps = weekObj[key].map((el) => ({
         temp_min: el.main.temp_min,
         temp_max: el.main.temp_max,
         date: el.dt_txt.split(" ")[0],
-        weather: el.weather[0].main
+        weather: el.weather[0].main,
       }));
-  
+
       if (temps.length > 0) {
         const minTemp = Math.min(...temps.map((temp) => temp.temp_min));
         const maxTemp = Math.max(...temps.map((temp) => temp.temp_max));
         const date = temps[0].date;
         const weather = temps[0].weather;
-  
+
         acc.push({
           date,
           minTemp,
@@ -65,14 +65,14 @@ export const Footer: React.FC<Props> = ({ city }) => {
           weather,
         });
       }
-  
+
       return acc;
     }, [] as WeatherData[]);
-  
+
     if (updatedWeekObj.length > 5) {
       updatedWeekObj.pop();
     }
-  
+
     setForecast(
       updatedWeekObj.sort(
         (a, b) =>
@@ -123,7 +123,7 @@ export const Footer: React.FC<Props> = ({ city }) => {
           </div>
           <img
             className="weather_title"
-            src={`/img/${day.weather}.png`}
+            src={`img/${day.weather}.png`}
             alt=""
           />
         </div>

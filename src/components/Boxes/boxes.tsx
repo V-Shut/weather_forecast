@@ -23,7 +23,7 @@ export const Boxes: React.FC<City> = ({ city }) => {
         <div className="other_params">
           <img
             className="weather_title"
-            src={`/img/${city?.weather[0].main}.png`}
+            src={`img/${city?.weather[0].main}.png`}
             alt="weather_image"
           />
           <h1 className="title">{city?.weather[0].main}</h1>

@@ -2,31 +2,36 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, WeatherResponse, Place } from "../../types";
 import { addToFavorites } from "../../Redux/favoritesSlice";
-import './style.css'
+import "./style.css";
 
 interface Props {
   city?: WeatherResponse;
   loadData: (lat: string, lon: string) => void;
 }
 
-const baseUrl = "http://api.openweathermap.org/geo/1.0/direct?q=";
+const baseUrl = "https://api.openweathermap.org/geo/1.0/direct?q=";
 const key = "&limit=8&appid=6db318e745d1d1fe15732dd5e22d6eaf";
 
 export const Head: React.FC<Props> = ({ city, loadData }) => {
   const [inputValue, setInputValue] = useState<string>("");
   const [availableCities, setAvailableCities] = useState<Place[]>([]);
   const [searchFocused, setSearchFocused] = useState(false);
-  const favorites = useSelector((state: RootState) => state.favorites.favorites);
+  const favorites = useSelector(
+    (state: RootState) => state.favorites.favorites
+  );
   const dispatch = useDispatch();
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter" && !!availableCities.length) {
-      loadData(availableCities[0].lat.toString(), availableCities[0].lon.toString());
+      loadData(
+        availableCities[0].lat.toString(),
+        availableCities[0].lon.toString()
+      );
       dispatch(addToFavorites(availableCities[0]));
       setAvailableCities([]);
       setSearchFocused(false);
     }
-  }
+  };
 
   const searchCity = (event: React.ChangeEvent<HTMLInputElement>) => {
     const city = event.target.value;
@@ -58,7 +63,14 @@ export const Head: React.FC<Props> = ({ city, loadData }) => {
               setSearchFocused(false);
             }, 200);
           }}
-          style={(searchFocused && (!!availableCities.length || !!favorites.length)) ? { borderBottomRightRadius: '0px', borderBottomLeftRadius: '0px'} : {}}
+          style={
+            searchFocused && (!!availableCities.length || !!favorites.length)
+              ? {
+                  borderBottomRightRadius: "0px",
+                  borderBottomLeftRadius: "0px",
+                }
+              : {}
+          }
         />
         <ul className="list">
           {!!availableCities.length &&

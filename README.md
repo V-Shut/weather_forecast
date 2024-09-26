@@ -2,6 +2,10 @@
 
 A React application for fetching and displaying weather data using the [OpenWeather API](https://openweathermap.org/).
 
+## Demo
+
+You can view the live demo [here](https://v-shut.github.io/weather_forecast/).
+
 ## Features
 
 - **City Search**: Search for current weather conditions by city name.
